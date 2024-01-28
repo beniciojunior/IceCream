@@ -54,9 +54,15 @@ final class PrivateDatabaseManager: DatabaseManager {
                     self.databaseChangeToken = nil
                     self.fetchChangesInDatabase(callback)
                 default:
+                    DispatchQueue.main.async {
+                        callback?(error)
+                    }
                     return
                 }
             default:
+                DispatchQueue.main.async {
+                    callback?(error)
+                }
                 return
             }
         }
